@@ -1,6 +1,3 @@
-/*
- * Copyright (c) schmiereck, 2019
- */
 package de.schmiereck.geneticGrid;
 
 /**

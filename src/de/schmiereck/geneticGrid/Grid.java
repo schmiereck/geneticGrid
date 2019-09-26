@@ -1,6 +1,3 @@
-/*
- * Copyright (c) open4business GmbH, 2019
- */
 package de.schmiereck.geneticGrid;
 
 import java.util.function.Function;
