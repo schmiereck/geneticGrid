@@ -5,11 +5,14 @@ package de.schmiereck.geneticGrid;
  *	Main.
  * </p>
  * 
+ * 
+ * 
  * @author smk
  * @version <p>26.09.2019:	created, smk</p>
  */
 public class Main
 {
+	private static final int ENERGIE_STATUS = 0;
 	private static final byte SUN_POWER = 3;
 	
 	public static void main(String[] args)
@@ -40,8 +43,8 @@ public class Main
 				
 				if (cell != null)
 				{
-					System.out.print("S");
-					cell.addStatus(0, SUN_POWER);
+					final byte overflowStatusValue = cell.addStatus(ENERGIE_STATUS, SUN_POWER);
+					System.out.print("S(" + overflowStatusValue + ")");
 				}
 				
 		 		return ret;
@@ -59,12 +62,32 @@ public class Main
 				
 				if (cell != null)
 				{
-					System.out.print("X");
+					calcCell(grid, gridCell, cell);
 				}
 				
 		 		return ret;
 		 	}
 		);
+	}
+
+	private static void calcCell(final Grid grid, final GridCell gridCell, final Cell cell)
+	{
+		final int energieStatusValue = cell.getStatus(ENERGIE_STATUS);
+		
+		if (energieStatusValue == 0)
+		{
+			killCell(gridCell);
+		}
+		else
+		{
+			new RuntimeException("no rulez");
+		}
+		System.out.print("C(" + energieStatusValue + ")");
+	}
+
+	private static void killCell(final GridCell gridCell)
+	{
+		gridCell.setCell(null);
 	}
 
 }

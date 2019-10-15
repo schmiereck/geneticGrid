@@ -1,0 +1,50 @@
+https://github.com/schmiereck/geneticGrid
+
+====================================
+Energie:
+	Energie kommt als Strahlung "von oben".
+	Spezieller Energiestatus.
+	Wird verbraucht, 
+		wenn die Energie (nr.0) auf andere Status verteilt wird.
+		wenn die Regeln berechnet werden.
+	Wird an Nachbarn weiter gegeben werden, wenn diese weniger haben.
+	Stirbt wenn Energie null.
+Status:
+    interner Status, Liste aus Werten
+	Können von Nachbarn abgefragt werden
+	Manche werden an Nachbarn weiter gegeben, wenn diese weniger haben und zu dem selben Organismus gehören.
+	Energie ist nur ein spezieller Status.
+	Liste der Status ist im Genom festgelegt.
+Nachbarn:	Front, Left, Right, Behind
+	^ Orientation
+    |
+    f
+   l*r
+    b
+Connected:
+	Spezieller Zugriff auf den Status der Nachbarn.
+	"r.7"
+Orientierung:
+	Zelle hat eine Orientierung die festlegt in welche Richtung sie "schaut".
+	Die Connected Nachbarn werden reltiv zu der Orientierung abgefragt.
+Rules:
+	Wenn (Bedingungen) Dann Funktion()
+Bedingungen:
+	Wert größer/ kleiner Wert
+Wert: 
+	Wert, Status oder Konstante, Operation(Wert, Wert)
+Funktionen:
+	wachsen(Richtung, Orientierung)	
+		Teilen.
+		Energie wird aufgeteilt
+	abbauen()	
+		Geht nur, wenn die Nachbarn noch connected sind.
+		Energie wird an connected Nachbarn weiter gegeben.
+	statusTransfer(sourceStatusNo, targetStatusNo, transferPercent)
+		Übertragung von Status.
+	teilen(Richtung, Orientierung)
+		Neuer Organismus.
+Organismus:
+	Alle Zellen die durch wachsen() gebildet wurden,
+	gehören zu einem Organismus.
+====================================

@@ -36,14 +36,38 @@ public class Cell
 		this.gridCell = gridCell;
 	}
 
-	public void addStatus(final int statusNo, final byte statusValue)
+	public byte addStatus(final int statusNo, final byte addStatusValue)
 	{
-		final int value = this.status[statusNo];
-		
-		if ((value + statusValue) <= Byte.MAX_VALUE)
+		if (addStatusValue < 0)
 		{
+			throw new RuntimeException("statusValue < 0");
 		}
-		this.status[statusNo] += statusValue;
-		throw new RuntimeException();
+		final byte statusValue = this.status[statusNo];
+		final int newStatusValue = statusValue + addStatusValue;
+
+		final byte usedStatusValue;
+		final byte overflowStatusValue;
+		
+		if (newStatusValue > Byte.MAX_VALUE)
+		{
+			usedStatusValue = Byte.MAX_VALUE;
+			overflowStatusValue = (byte)(newStatusValue - Byte.MAX_VALUE);
+		}
+		else
+		{
+			usedStatusValue = (byte)newStatusValue;
+			overflowStatusValue = 0;
+		}
+		
+		this.status[statusNo] = usedStatusValue;
+		
+		return overflowStatusValue;
+	}
+	
+	public byte getStatus(final int statusNo)
+	{
+		final byte statusValue = this.status[statusNo];
+		
+		return statusValue;
 	}
 }
